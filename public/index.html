@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snip | Premium URL Shortener</title>
+    <!-- Google Fonts: Outfit and Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700;800&display=swap" rel="stylesheet">
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="ambient-background">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+
+    <nav class="navbar">
+        <div class="logo">Snip<span class="dot">.</span></div>
+        <div class="nav-links">
+            <a href="#" class="active" id="tab-shorten">Shorten</a>
+            <a href="#" id="tab-analytics">Analytics</a>
+            <a href="https://github.com" target="_blank" class="github-btn">
+                <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                GitHub
+            </a>
+        </div>
+    </nav>
+
+    <main class="container">
+        <!-- Shortener Section -->
+        <section id="section-shorten" class="glass-panel active-section">
+            <div class="header-text">
+                <h1>Make it <span class="gradient-text">short.</span></h1>
+                <p>Create sleek, memorable links in seconds. Share them anywhere.</p>
+            </div>
+
+            <form id="shorten-form" class="action-form">
+                <div class="input-group">
+                    <label for="url">Original Long URL</label>
+                    <input type="url" id="url" placeholder="https://www.verylongdomain.com/article/123" required>
+                </div>
+                
+                <div class="input-group">
+                    <label for="customCode">Custom Alias <span class="optional">(Optional)</span></label>
+                    <div class="prefix-input">
+                        <span class="domain-prefix" id="domain-display">snip.ly/</span>
+                        <input type="text" id="customCode" placeholder="my-cool-link" pattern="[a-zA-Z0-9-]+" title="Letters, numbers, and hyphens only.">
+                    </div>
+                </div>
+
+                <button type="submit" class="primary-btn" id="shorten-btn">
+                    <span>Shorten URL</span>
+                    <div class="loader hidden" id="shorten-loader"></div>
+                </button>
+            </form>
+
+            <div id="error-message" class="alert error hidden"></div>
+
+            <div id="result-card" class="result-card hidden">
+                <div class="result-header">Your short link is ready!</div>
+                <div class="result-body">
+                    <a href="#" target="_blank" id="short-link-display">snip.ly/abc</a>
+                    <button id="copy-btn" class="icon-btn" title="Copy to clipboard">
+                        <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Analytics Section -->
+        <section id="section-analytics" class="glass-panel hidden-section">
+            <div class="header-text">
+                <h1>Track <span class="gradient-text">Performance.</span></h1>
+                <p>Paste your short alias below to see your real-time click data.</p>
+            </div>
+
+            <form id="analytics-form" class="action-form inline-form">
+                <div class="input-group">
+                    <input type="text" id="analyticsCode" placeholder="Enter short alias (e.g., my-cool-link)" required>
+                </div>
+                <button type="submit" class="primary-btn" id="analytics-btn">
+                    <span>Analyze</span>
+                    <div class="loader hidden" id="analytics-loader"></div>
+                </button>
+            </form>
+
+            <div id="analytics-error" class="alert error hidden"></div>
+
+            <div id="analytics-dashboard" class="dashboard hidden">
+                <div class="stat-cards">
+                    <div class="stat-card">
+                        <div class="stat-title">Total Clicks</div>
+                        <div class="stat-value gradient-text" id="total-clicks">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-title">Created On</div>
+                        <div class="stat-value small-text" id="created-date">--</div>
+                    </div>
+                </div>
+
+                <div class="dashboard-section">
+                    <h3>Recent Traffic</h3>
+                    <div class="table-container">
+                        <table id="recent-clicks-table">
+                            <thead>
+                                <tr>
+                                    <th>Date & Time</th>
+                                    <th>IP Address</th>
+                                    <th>Device/Browser</th>
+                                </tr>
+                            </thead>
+                            <tbody id="recent-clicks-body">
+                                <!-- Rows generated by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
