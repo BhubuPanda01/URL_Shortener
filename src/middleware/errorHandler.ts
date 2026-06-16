@@ -27,7 +27,8 @@ export const errorHandler = (err: any, req: Request, res: Response, next: NextFu
   // Default to 500
   return res.status(500).json({
     success: false,
-    error: "Internal Server Error",
-    code: "INTERNAL_SERVER_ERROR"
+    error: err.message || "Internal Server Error",
+    code: "INTERNAL_SERVER_ERROR",
+    stack: process.env.NODE_ENV === 'development' ? err.stack : err.stack // temporarily expose stack
   });
 };
