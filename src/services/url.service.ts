@@ -17,8 +17,8 @@ export const shortenUrl = async (originalUrl: string, customCode?: string) => {
   try {
     // Cache in Redis (TTL = 3600 seconds)
     await redis.setex(`url:${shortCode}`, 3600, originalUrl);
-  } catch (err) {
-    console.error('Redis Cache Error (Skipping cache set):', err.message);
+  } catch (err: any) {
+    console.error('Redis Cache Error (Skipping cache set):', err.message || err);
   }
 
   return newUrl;
@@ -33,8 +33,8 @@ export const resolveUrl = async (shortCode: string) => {
     if (cachedUrl) {
       return { originalUrl: cachedUrl, isCached: true };
     }
-  } catch (err) {
-    console.error('Redis Cache Error (Skipping cache read):', err.message);
+  } catch (err: any) {
+    console.error('Redis Cache Error (Skipping cache read):', err.message || err);
   }
 
   // 2. Cache MISS: query PostgreSQL
@@ -49,8 +49,8 @@ export const resolveUrl = async (shortCode: string) => {
   // 3. Store in Redis gracefully
   try {
     await redis.setex(cacheKey, 3600, dbUrl.originalUrl);
-  } catch (err) {
-    console.error('Redis Cache Error (Skipping cache set):', err.message);
+  } catch (err: any) {
+    console.error('Redis Cache Error (Skipping cache set):', err.message || err);
   }
 
   return { originalUrl: dbUrl.originalUrl, dbUrl, isCached: false };
