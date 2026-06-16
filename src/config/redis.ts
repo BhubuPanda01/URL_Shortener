@@ -5,6 +5,7 @@ let redis: Redis;
 
 if (redisUrl) {
   // If a full connection string is provided (e.g. redis:// or rediss://)
+  console.log("Redis Config: Using REDIS_URL from environment");
   const isTls = redisUrl.startsWith('rediss://');
   
   redis = new Redis(redisUrl, {
@@ -15,6 +16,8 @@ if (redisUrl) {
   // Fallback to host/port
   const redisHost = process.env.REDIS_HOST || 'localhost';
   const redisPort = parseInt(process.env.REDIS_PORT || '6379', 10);
+  
+  console.log(`Redis Config: REDIS_URL not found. Falling back to host: ${redisHost}, port: ${redisPort}`);
   
   redis = new Redis({
     host: redisHost,

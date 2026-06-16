@@ -37,6 +37,8 @@ export const rateLimiter = async (req: Request, res: Response, next: NextFunctio
 
     next();
   } catch (error) {
-    next(error);
+    console.error('Redis Rate Limiter Error (Skipping rate limit):', error.message);
+    // Fail open: if Redis is down, we still want to allow URL shortening to work
+    next();
   }
 };
