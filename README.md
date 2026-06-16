@@ -16,14 +16,14 @@
 </p>
 
 <!-- ![Snip Application Screenshot](https://via.placeholder.com/1200x600.png?text=Snip+URL+Shortener+UI+Screenshot) -->
-> **Note**: *Replace this image URL with an actual screenshot of your live Glassmorphism UI!*
+<!-- > **Note**: *Replace this image URL with an actual screenshot of your live Glassmorphism UI!* -->
 
 ---
 
 ## 🚀 Live Demo
 
 You can test the fully functional live application here:
-**👉 [https://url-shortener-yva7.onrender.com](https://url-shortener-yva7.onrender.com)** *(Replace with your actual Render domain if different)*
+**👉 [https://url-shortener-yva7.onrender.com](https://url-shortener-yva7.onrender.com)** 
 
 ---
 
