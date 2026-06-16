@@ -1,12 +1,21 @@
 import Redis from 'ioredis';
 
-const redisHost = process.env.REDIS_HOST || 'localhost';
-const redisPort = parseInt(process.env.REDIS_PORT || '6379', 10);
+const redisUrl = process.env.REDIS_URL;
+let redis: Redis;
 
-const redis = new Redis({
-  host: redisHost,
-  port: redisPort,
-});
+if (redisUrl) {
+  // If a full connection string is provided (e.g. redis:// or rediss://)
+  redis = new Redis(redisUrl);
+} else {
+  // Fallback to host/port
+  const redisHost = process.env.REDIS_HOST || 'localhost';
+  const redisPort = parseInt(process.env.REDIS_PORT || '6379', 10);
+  
+  redis = new Redis({
+    host: redisHost,
+    port: redisPort,
+  });
+}
 
 redis.on('error', (err) => {
   console.error('Redis Client Error:', err);
