@@ -5,7 +5,12 @@ let redis: Redis;
 
 if (redisUrl) {
   // If a full connection string is provided (e.g. redis:// or rediss://)
-  redis = new Redis(redisUrl);
+  const isTls = redisUrl.startsWith('rediss://');
+  
+  redis = new Redis(redisUrl, {
+    tls: isTls ? { rejectUnauthorized: false } : undefined,
+    family: 0, // Helps with DNS resolution on some cloud platforms
+  });
 } else {
   // Fallback to host/port
   const redisHost = process.env.REDIS_HOST || 'localhost';
